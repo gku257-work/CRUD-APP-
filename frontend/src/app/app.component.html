@@ -1,0 +1,45 @@
+<h1>{{ title }}</h1>
+
+<section>
+  <h2>Add Employee</h2>
+  <form (submit)="add(); $event.preventDefault()">
+    <input placeholder="Name" [(ngModel)]="newEmployee.name" name="name" />
+    <input placeholder="Email" [(ngModel)]="newEmployee.email" name="email" />
+    <button type="submit">Add</button>
+  </form>
+</section>
+
+<section>
+  <h2>Employees</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let e of employees">
+        <td>{{ e.id }}</td>
+        <td>{{ e.name }}</td>
+        <td>{{ e.email }}</td>
+        <td class="actions">
+          <button (click)="startEdit(e)">Edit</button>
+          <button (click)="remove(e.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section *ngIf="editing as edit">
+  <h2>Edit Employee #{{ edit.id }}</h2>
+  <form (submit)="saveEdit(); $event.preventDefault()">
+    <input placeholder="Name" [(ngModel)]="edit.name" name="edit_name" />
+    <input placeholder="Email" [(ngModel)]="edit.email" name="edit_email" />
+    <button type="submit">Save</button>
+    <button type="button" (click)="cancelEdit()">Cancel</button>
+  </form>
+</section>
