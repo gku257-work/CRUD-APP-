@@ -50,7 +50,7 @@ jobs:
       - name: Build Docker image
         working-directory: backend
         run: |
-          docker build -t ${{ env.GCP_REGION }}-docker.pkg.dev/${{ env.GCP_PROJECT_ID }}/${{ env.ARTIFACT_REGISTRY_REPO }}/${{ env.IMAGE_NAME }}:latest .
+          gcloud auth configure-docker --quiet
 
       - name: Push Docker image
         run: |
