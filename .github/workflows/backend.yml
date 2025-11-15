@@ -5,7 +5,7 @@ on:
     branches: [ "main" ]
     paths:
       - "backend/**"
-workflow_dispatch: # This enables manual triggering
+  workflow_dispatch: # This enables manual triggering
       
 
 jobs:
