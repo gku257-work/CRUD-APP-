@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { EmployeeService } from './employee.service';
 import { Employee } from './employee.model';
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -17,15 +18,21 @@ export class AppComponent {
   employees: Employee[] = [];
   newEmployee: Employee = { name: '', email: '' };
   editing: Employee | null = null;
+  apiError = false;
+  apiBaseUrl = environment.apiBaseUrl;
 
   ngOnInit() {
     this.refresh();
   }
 
   refresh() {
+    this.apiError = false;
     this.service.list().subscribe({
       next: (list) => this.employees = list,
-      error: () => this.employees = []
+      error: () => {
+        this.apiError = true;
+        this.employees = [];
+      }
     });
   }
 

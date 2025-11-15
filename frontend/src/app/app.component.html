@@ -1,5 +1,11 @@
 <h1>{{ title }}</h1>
 
+<div *ngIf="apiError" style="background:#ffe5e5;color:#a10000;padding:10px;margin-bottom:12px;border:1px solid #ffb3b3;">
+  Backend unreachable at {{ apiBaseUrl }}. The list is empty until the API is available.
+  Update environment or run backend locally on {{ apiBaseUrl }}.
+  
+</div>
+
 <section>
   <h2>Add Employee</h2>
   <form (submit)="add(); $event.preventDefault()">
